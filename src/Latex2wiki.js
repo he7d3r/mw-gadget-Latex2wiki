@@ -104,24 +104,24 @@ tr_list2 = [
 	[/\\ldots/, (lambda : "..."), dummy],
 	[/(?i)\\Pagebreak/, (lambda : ""), dummy], //pagebreak
 	[/\-{3}/, (lambda : "â€”"), dummy],
-	[/{\\em (.*?)}/, (lambda : /''\1''"), dummy], //cursivas
+	[/{\\em (.*?)}/, (lambda : "''\1''"), dummy], //cursivas
 	[/(?im)^\\pro /, (lambda : "#"), dummy], //lista ordenada
 	[/(?im)^\\spro /, (lambda : "*"), dummy], //lista sin orden
 	[/\\ldots/, (lambda : "..."), dummy],
 	[/\\begin\{document}/, None, start_doc],
 	[/\\\\$/, (lambda : "\n\n"), dummy],
 	[/\\\$/, (lambda : "$"), dummy],
-	[/\\emph{(.*?)}/, (lambda : /_\1_"), dummy],
-	[/(?i)\\textit{(.*?)}/, (lambda :/''\1''"), dummy],
-	[/(?i)\\texttt{(.*?)}/, (lambda : /<tt>\1</tt>"), dummy],
-	[/(?i)\\textbf{(.*?)}/, (lambda : /'''\1'''"), dummy],
-	[/(?i)\\url{(.*?)}/, (lambda : /\1"), dummy],
+	[/\\emph{(.*?)}/, (lambda : "_\1_"), dummy],
+	[/(?i)\\textit{(.*?)}/, (lambda : "''\1''"), dummy],
+	[/(?i)\\texttt{(.*?)}/, (lambda : "<tt>\1</tt>"), dummy],
+	[/(?i)\\textbf{(.*?)}/, (lambda : "'''\1'''"), dummy],
+	[/(?i)\\url{(.*?)}/, (lambda : "\1"), dummy],
 	[/\\begin{verbatim}/, (lambda : "<verbatim>"), start_verbatim],
 	[/\\end{verbatim}/, (lambda : "</verbatim>"), end_verbatim],
 	[/\\begin{itemize}/, (lambda : "\n"), inc_bullet],
 	[/\\end{itemize}/, None, dec_bullet],
-  [/\\item (.*?)/, (lambda : ur"\n" + (ur"   " * bullet_level) + ur"* \1"), dummy),
-	[/\\item\[(.*?)\][\n ]*/, (lambda : /:\1 "), dummy],
+	[/\\item (.*?)/, (lambda : ur"\n" + (ur"   " * bullet_level) + ur"* \1"), dummy),
+	[/\\item\[(.*?)\][\n ]*/, (lambda : ":\1 "), dummy],
 	[/\\begin{.*?}/, None, dummy],
 	[/\\end{.*?}/, None, dummy],
 	[/``(.*?)''/, (lambda :ur'"\1"'), dummy],
@@ -146,11 +146,11 @@ tr_list2 = [
 	//[/[^\\]?\{/, None, dummy],
 	//[/[^\\]?\}/, None, dummy],
 	[/(?im)^\%.*$\n/, None, dummy], //quitamos comentarios
-	[/\\\\/, (lambda: ur'\n'), dummy], 
-	[/\\tt ([^\}]*)/, (lambda: ur'<tt>\1</tt>'), dummy], 
-	[/\\small ([^\}]*)/, (lambda: ur'<small>\1</small>'), dummy], 
-	[/\\centerline{(.*?)}/, (lambda: ur'<center>\1</center>'), dummy], 
-	[/\\copyright/, (lambda: ur'Â©'), dummy], 
+	[/\\\\/, (lambda: ur'\n'), dummy],
+	[/\\tt ([^\}]*)/, (lambda: ur'<tt>\1</tt>'), dummy],
+	[/\\small ([^\}]*)/, (lambda: ur'<small>\1</small>'), dummy],
+	[/\\centerline{(.*?)}/, (lambda: ur'<center>\1</center>'), dummy],
+	[/\\copyright/, (lambda: ur'Â©'), dummy],
     ]
 
 //in_stream  = sys.stdin;
