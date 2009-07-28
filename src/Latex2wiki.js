@@ -89,68 +89,68 @@ function translate_to_html(char){
 }
 
 function header(i){
-	return ur"%s \1 %s" % (i*'=', i*'=');
+	return ur"%s \1 %s" % % (i*'=', i*'=');
 }
 
 var NONE = "__@NONE@__";
 
 tr_list2 = [
-	//(ur">", (lambda: translate_to_html('>')), dummy),
-	//(ur"<", (lambda: translate_to_html('<')), dummy),
-	(ur"(?im)\$\$?([^$]*?)\$?\$", (lambda: ur'<math>\1</math>'), dummy),
-	(ur"\\footnotesize", None, dummy),
-	(ur"\\footnote{(.*?)}", (lambda :ur"<ref>\1</ref>"), dummy),
-	(ur"\\index{(.*?)}", None, dummy), //todo
-	(ur"\\ldots", (lambda : "..."), dummy),
-	(ur"(?i)\\Pagebreak", (lambda : ur""), dummy), //pagebreak
-	(ur"\-{3}", (lambda : "â€”"), dummy),
-	(ur"{\\em (.*?)}", (lambda : ur"''\1''"), dummy), //cursivas
-	(ur"(?im)^\\pro ", (lambda : "#"), dummy), //lista ordenada
-	(ur"(?im)^\\spro ", (lambda : "*"), dummy), //lista sin orden
-	(ur"\\ldots", (lambda : "..."), dummy),
-	(ur"\\begin\{document}", None, start_doc),
-	(ur"\\\\$", (lambda : "\n\n"), dummy),
-	(ur"\\\$", (lambda : "$"), dummy),
-	(ur"\\emph{(.*?)}", (lambda : ur"_\1_"), dummy),
-	(ur"(?i)\\textit{(.*?)}", (lambda :ur"''\1''"), dummy),
-	(ur"(?i)\\texttt{(.*?)}", (lambda : ur"<tt>\1</tt>"), dummy),
-	(ur"(?i)\\textbf{(.*?)}", (lambda : ur"'''\1'''"), dummy),
-	(ur"(?i)\\url{(.*?)}", (lambda : ur"\1"), dummy),
-	(ur"\\begin{verbatim}", (lambda : "<verbatim>"), start_verbatim),
-	(ur"\\end{verbatim}", (lambda : "</verbatim>"), end_verbatim),
-	(ur"\\begin{itemize}", (lambda : "\n"), inc_bullet),
-	(ur"\\end{itemize}", None, dec_bullet),
-	(ur"\\item (.*?)", (lambda : ur"\n" + (ur"   " * bullet_level) + ur"* \1"), dummy),
-	(ur"\\item\[(.*?)\][\n ]*", (lambda : ur":\1 "), dummy),
-	(ur"\\begin{.*?}", None, dummy),
-	(ur"\\end{.*?}", None, dummy),
-	(ur"``(.*?)''", (lambda :ur'"\1"'), dummy),
-	(ur"(?i)\\subsubsection{(.*?)}", (lambda : header(4)), dummy),
-	(ur"(?i)\\subsection{(.*?)}", (lambda : header(3)), dummy),
-	(ur"(?i)\\section{(.*?)}", (lambda : header(2)), dummy),
-	(ur"(?i)\\chaptere?{(.*?)}", (lambda : header(1)), dummy),
-	(ur"(?i)\\index{(.*?)}", None, dummy),
-	(ur"\\_", (lambda :"_"), dummy),
-	(ur"\\tableofcontents",None, dummy),
-	(ur"\\null",None, dummy),
-	(ur"\\newpage",None, dummy),
-	(ur"\\thispagestyle{.*?}", None, dummy),
-	(ur"\\maketitle", None, dummy),
-	(ur"\\-", None, dummy),
-	(ur"\\clearpage", (lambda : ur'<br clear="all" />'), dummy),
-	(ur"\\cleardoublepage", (lambda : ur'<br clear="all" />'), dummy),
-	(ur"\\markboth{}{}", None, dummy), //todo
-	(ur"\\addcontentsline.*", None, dummy), //todo
-	//(ur"\n$", decide_el, dummy),
-	//(ur"(?im)(\w)[\n\r]+(\w)", (lambda :ur'\1 \2'), dummy),
-	//(ur"[^\\]?\{", None, dummy),
-	//(ur"[^\\]?\}", None, dummy),
-	(ur"(?im)^\%.*$\n", None, dummy), //quitamos comentarios
-	(ur"\\\\", (lambda: ur'\n'), dummy), 
-	(ur"\\tt ([^\}]*)", (lambda: ur'<tt>\1</tt>'), dummy), 
-	(ur"\\small ([^\}]*)", (lambda: ur'<small>\1</small>'), dummy), 
-	(ur"\\centerline{(.*?)}", (lambda: ur'<center>\1</center>'), dummy), 
-	(ur"\\copyright", (lambda: ur'Â©'), dummy), 
+	//[/>/, (lambda: translate_to_html('>')), dummy],
+	//]/</, (lambda: translate_to_html('<')), dummy],
+	[/(?im)\$\$?([^$]*?)\$?\$/, (lambda: "<math>\1</math>"), dummy],
+	[/\\footnotesize/, None, dummy],
+	[/\\footnote{(.*?)}/, (lambda :"<ref>\1</ref>"), dummy],
+	[/\\index{(.*?)}/, None, dummy], //todo
+	[/\\ldots/, (lambda : "..."), dummy],
+	[/(?i)\\Pagebreak/, (lambda : ""), dummy], //pagebreak
+	[/\-{3}/, (lambda : "â€”"), dummy],
+	[/{\\em (.*?)}/, (lambda : /''\1''"), dummy], //cursivas
+	[/(?im)^\\pro /, (lambda : "#"), dummy], //lista ordenada
+	[/(?im)^\\spro /, (lambda : "*"), dummy], //lista sin orden
+	[/\\ldots/, (lambda : "..."), dummy],
+	[/\\begin\{document}/, None, start_doc],
+	[/\\\\$/, (lambda : "\n\n"), dummy],
+	[/\\\$/, (lambda : "$"), dummy],
+	[/\\emph{(.*?)}/, (lambda : /_\1_"), dummy],
+	[/(?i)\\textit{(.*?)}/, (lambda :/''\1''"), dummy],
+	[/(?i)\\texttt{(.*?)}/, (lambda : /<tt>\1</tt>"), dummy],
+	[/(?i)\\textbf{(.*?)}/, (lambda : /'''\1'''"), dummy],
+	[/(?i)\\url{(.*?)}/, (lambda : /\1"), dummy],
+	[/\\begin{verbatim}/, (lambda : "<verbatim>"), start_verbatim],
+	[/\\end{verbatim}/, (lambda : "</verbatim>"), end_verbatim],
+	[/\\begin{itemize}/, (lambda : "\n"), inc_bullet],
+	[/\\end{itemize}/, None, dec_bullet],
+  [/\\item (.*?)/, (lambda : ur"\n" + (ur"   " * bullet_level) + ur"* \1"), dummy),
+	[/\\item\[(.*?)\][\n ]*/, (lambda : /:\1 "), dummy],
+	[/\\begin{.*?}/, None, dummy],
+	[/\\end{.*?}/, None, dummy],
+	[/``(.*?)''/, (lambda :ur'"\1"'), dummy],
+	[/(?i)\\subsubsection{(.*?)}/, (lambda : header(4)), dummy],
+	[/(?i)\\subsection{(.*?)}/, (lambda : header(3)), dummy],
+	[/(?i)\\section{(.*?)}/, (lambda : header(2)), dummy],
+	[/(?i)\\chaptere?{(.*?)}/, (lambda : header(1)), dummy],
+	[/(?i)\\index{(.*?)}/, None, dummy],
+	[/\\_/, (lambda :"_"), dummy],
+	[/\\tableofcontents/,None, dummy],
+	[/\\null/,None, dummy],
+	[/\\newpage/,None, dummy],
+	[/\\thispagestyle{.*?}/, None, dummy],
+	[/\\maketitle/, None, dummy],
+	[/\\-/, None, dummy],
+	[/\\clearpage/, (lambda : ur'<br clear="all" />'), dummy],
+	[/\\cleardoublepage/, (lambda : ur'<br clear="all" />'), dummy],
+	[/\\markboth{}{}/, None, dummy], //todo
+	[/\\addcontentsline.*/, None, dummy], //todo
+	//[/\n$/, decide_el, dummy],
+	//[/(?im)(\w)[\n\r]+(\w)/, (lambda :ur'\1 \2'), dummy],
+	//[/[^\\]?\{/, None, dummy],
+	//[/[^\\]?\}/, None, dummy],
+	[/(?im)^\%.*$\n/, None, dummy], //quitamos comentarios
+	[/\\\\/, (lambda: ur'\n'), dummy], 
+	[/\\tt ([^\}]*)/, (lambda: ur'<tt>\1</tt>'), dummy], 
+	[/\\small ([^\}]*)/, (lambda: ur'<small>\1</small>'), dummy], 
+	[/\\centerline{(.*?)}/, (lambda: ur'<center>\1</center>'), dummy], 
+	[/\\copyright/, (lambda: ur'Â©'), dummy], 
     ]
 
 //in_stream  = sys.stdin;
@@ -202,7 +202,7 @@ for (reg, sub, fun in tr_list2){
   if (sub != None){
 		salida = p.sub(sub(), salida);
 	}else{
-		salida = p.sub("", salida);
+		salida = p.sub(//, salida);
   }
 }
 //FIN PROCESADO
