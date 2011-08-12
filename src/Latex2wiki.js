@@ -88,25 +88,25 @@ var NONE = "__@NONE@__";
 tr_list2 = [
 	//[/>/, (lambda: translate_to_html('>')), dummy],
 	//]/</, (lambda: translate_to_html('<')), dummy],
-	[/(?im)\$\$?([^$]*?)\$?\$/, (lambda: "<math>\1</math>"), dummy],
+	[/\$\$?([^$]*?)\$?\$/im, (lambda: "<math>\1</math>"), dummy],
 	[/\\footnotesize/, None, dummy],
 	[/\\footnote{(.*?)}/, (lambda :"<ref>\1</ref>"), dummy],
-	[/\\index{(.*?)}/, None, dummy], //todo
+	[/\\index\{(.*?)\}/, None, dummy], //todo
 	[/\\ldots/, (lambda : "..."), dummy],
-	[/(?i)\\Pagebreak/, (lambda : ""), dummy], //pagebreak
+	[/\\Pagebreak/i, (lambda : ""), dummy], //pagebreak
 	[/\-{3}/, (lambda : "â€”"), dummy],
 	[/{\\em (.*?)}/, (lambda : "''\1''"), dummy], //cursivas
-	[/(?im)^\\pro /, (lambda : "#"), dummy], //lista ordenada
-	[/(?im)^\\spro /, (lambda : "*"), dummy], //lista sin orden
+	[/^\\pro /im, (lambda : "#"), dummy], //lista ordenada
+	[/^\\spro /im, (lambda : "*"), dummy], //lista sin orden
 	[/\\ldots/, (lambda : "..."), dummy],
 	[/\\begin\{document}/, None, start_doc],
 	[/\\\\$/, (lambda : "\n\n"), dummy],
 	[/\\\$/, (lambda : "$"), dummy],
 	[/\\emph{(.*?)}/, (lambda : "_\1_"), dummy],
-	[/(?i)\\textit{(.*?)}/, (lambda : "''\1''"), dummy],
-	[/(?i)\\texttt{(.*?)}/, (lambda : "<tt>\1</tt>"), dummy],
-	[/(?i)\\textbf{(.*?)}/, (lambda : "'''\1'''"), dummy],
-	[/(?i)\\url{(.*?)}/, (lambda : "\1"), dummy],
+	[/\\textit{(.*?)}/i, (lambda : "''\1''"), dummy],
+	[/\\texttt{(.*?)}/i, (lambda : "<tt>\1</tt>"), dummy],
+	[/\\textbf{(.*?)}/i, (lambda : "'''\1'''"), dummy],
+	[/\\url{(.*?)}/i, (lambda : "\1"), dummy],
 	[/\\begin{verbatim}/, (lambda : "<verbatim>"), start_verbatim],
 	[/\\end{verbatim}/, (lambda : "</verbatim>"), end_verbatim],
 	[/\\begin{itemize}/, (lambda : "\n"), inc_bullet],
@@ -116,11 +116,11 @@ tr_list2 = [
 	[/\\begin{.*?}/, None, dummy],
 	[/\\end{.*?}/, None, dummy],
 	[/``(.*?)''/, (lambda :ur'"\1"'), dummy],
-	[/(?i)\\subsubsection{(.*?)}/, (lambda : header(4)), dummy],
-	[/(?i)\\subsection{(.*?)}/, (lambda : header(3)), dummy],
-	[/(?i)\\section{(.*?)}/, (lambda : header(2)), dummy],
-	[/(?i)\\chaptere?{(.*?)}/, (lambda : header(1)), dummy],
-	[/(?i)\\index{(.*?)}/, None, dummy],
+	[/\\subsubsection{(.*?)}/i, (lambda : header(4)), dummy],
+	[/\\subsection{(.*?)}/i, (lambda : header(3)), dummy],
+	[/\\section{(.*?)}/i, (lambda : header(2)), dummy],
+	[/\\chaptere?{(.*?)}/i, (lambda : header(1)), dummy],
+	[/\\index{(.*?)}/i, None, dummy],
 	[/\\_/, (lambda :"_"), dummy],
 	[/\\tableofcontents/,None, dummy],
 	[/\\null/,None, dummy],
@@ -133,10 +133,10 @@ tr_list2 = [
 	[/\\markboth{}{}/, None, dummy], //todo
 	[/\\addcontentsline.*/, None, dummy], //todo
 	//[/\n$/, decide_el, dummy],
-	//[/(?im)(\w)[\n\r]+(\w)/, (lambda :ur'\1 \2'), dummy],
+	//[/(\w)[\n\r]+(\w)/im, (lambda :ur'\1 \2'), dummy],
 	//[/[^\\]?\{/, None, dummy],
 	//[/[^\\]?\}/, None, dummy],
-	[/(?im)^\%.*$\n/, None, dummy], //quitamos comentarios
+	[/^\%.*$\n/im, None, dummy], //quitamos comentarios
 	[/\\\\/, (lambda: ur'\n'), dummy],
 	[/\\tt ([^\}]*)/, (lambda: ur'<tt>\1</tt>'), dummy],
 	[/\\small ([^\}]*)/, (lambda: ur'<small>\1</small>'), dummy],
