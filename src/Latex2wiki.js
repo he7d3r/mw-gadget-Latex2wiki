@@ -1,4 +1,3 @@
-// <source lang="javascript">
 /** Latex2wiki **
  * Esta versão em javascript é uma adaptação do código de
  * Marc PoulhiÃ¨s <marc.poulhies@epfl.ch>, que era baseado na
@@ -28,50 +27,46 @@ var end_line = 1;
 var verbatim_mode = 0;
 
 function dummy(){
-    pass;
+	/* pass; */
 }
 
 function inc_bullet(){
-	global bullet_level;
+	/* global bullet_level; */
 	bullet_level += 1;
 }
 
 function dec_bullet(){
-	global bullet_level;
+	/* global bullet_level; */
 	bullet_level -= 1;
 }
 
 function start_doc(){
-	global bdoc;
+	/* global bdoc; */
 	bdoc = 1;
 }
 
 function do_not_el(){
-	global end_line;
+	/* global end_line; */
 	end_line = None;
 }
 
 function do_el(){
-	global end_line;
+	/* global end_line; */
 	end_line = 1;
 }
 
 function decide_el(){
-	global end_line;
-	if (bullet_level == 0){
-		return "\n";
-	} else {
-		return " ";
-	}
+	/* global end_line; */
+	return (bullet_level === 0) ? '\n' : ' ';
 }
 
 function start_verbatim(){
-	global verbatim_mode;
+	/* global verbatim_mode; */
 	verbatim_mode = 1;
 }
 
 function end_verbatim(){
-	global verbatim_mode;
+	/* global verbatim_mode; */
 	verbatim_mode = 0;
 }
 
@@ -79,17 +74,13 @@ var conv_table = { '>':'&gt;',
 			   '<':'&lt;'};
 
 function translate_to_html(char){
-	global verbatim_mode;
-	global conv_table;
-	if verbatim_mode == 0{
-		return conv_table[char];
-	} else {
-		return char;
-	}
+	/* global verbatim_mode;
+	global conv_table; */
+	return ( verbatim_mode === 0 )? conv_table[char] : char;
 }
 
 function header(i){
-	return ur"%s \1 %s" % % (i*'=', i*'=');
+	/* return ur"%s \1 %s" % % (i*'=', i*'='); */
 }
 
 var NONE = "__@NONE@__";
@@ -219,4 +210,3 @@ if re.search(ur'<ref[> ]', salida){
 }
 f.write(salida.encode('utf-8'));
 f.close();
-// </source>
