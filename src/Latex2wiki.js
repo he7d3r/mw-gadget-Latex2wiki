@@ -1,5 +1,4 @@
 /** Latex2wiki **
- * @tracking: [[Special:GlobalUsage/User:Helder.wiki/Tools/Latex2wiki.js]] ([[File:User:Helder.wiki/Tools/Latex2wiki.js]])
  */
 
 //import sys, re
